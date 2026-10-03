@@ -1,30 +1,53 @@
 import os
 
+from logs import Log
+
+log = Log()
+
+
 class CuentaBancaria:
 
-    def __init__(self):
-        self.saldo = 0
-
-    def ingresar(self, cantidad):
-        self.saldo += cantidad
-
-    def retirar(self, cantidad):
-        self.saldo -= cantidad
+    def __init__(self, saldo=0.0):
+        self.saldo = float(saldo)
 
     def getSaldo(self):
         return self.saldo
 
+    def ingresar(self, cantidad):
+        if cantidad <= 0:
+            return False
+        self.saldo += cantidad
+        log.escribir("INFO", f"Ingreso de {cantidad}€ realizado en la cuenta bancaria.")
+        return True
+
+    def retirar(self, cantidad):
+        if cantidad <= 0:
+            return False
+        self.saldo -= cantidad
+        log.escribir("INFO", f"Retirada de {cantidad}€ realizado en la cuenta bancaria.")
+        return True
+
 
 class Deposito:
 
-    def __init__(self):
-        self.saldo = 0
+    def __init__(self, saldo=0.0):
+        self.saldo = float(saldo)
 
     def ingresar(self, cantidad):
+        if cantidad <= 0:
+            return False
         self.saldo += cantidad
+        log.escribir("INFO", f"Ingreso de {cantidad}€ realizado en la cuenta bancaria.")
+
+        return True
 
     def retirar(self, cantidad):
+        if cantidad <= 0:
+            return False
         self.saldo -= cantidad
+        log.escribir("INFO", f"Retirada de {cantidad}€ realizado en la cuenta bancaria.")
+
+        return True
 
     def getSaldo(self):
         return self.saldo

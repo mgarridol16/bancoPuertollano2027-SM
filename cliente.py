@@ -3,6 +3,7 @@ from logs import Log
 
 log = Log()
 
+
 def cargarCliente(tipo):
     while True:
         num = input("Introduce el número de cliente: ")
@@ -19,7 +20,6 @@ def cargarCliente(tipo):
 
 
 def leerFichero(numCliente):
-
     cliente = Cliente(numCliente)
 
     try:
@@ -32,7 +32,13 @@ def leerFichero(numCliente):
 
                 datos = linea.strip().split(";")
 
-                cantidad = float(datos[0])
+                try:
+                    cantidad = float(datos[0])
+                except ValueError:
+                    log.escribir("ERROR", f"Línea con cantidad incorrecta: {linea.strip()}")
+                    linea = f.readline()
+                    continue
+
                 operacion = datos[1]
                 destino = datos[2]
 
@@ -66,7 +72,6 @@ def leerFichero(numCliente):
 
 
 def cargarClienteGuardado(numCliente):
-
     try:
         with open(f"datosClientes/{numCliente}.txt", "r") as f:
 
