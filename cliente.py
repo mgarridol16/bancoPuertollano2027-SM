@@ -85,8 +85,10 @@ def cargarClienteGuardado(numCliente):
     try:
         with open(f"datosClientes/{numCliente}.txt", "r") as f:
 
-            linea = f.readline()
-            datos = linea.split(";")
+            linea = f.readlines()
+            datos = []
+            for d in linea:
+                datos.append(d.strip())
 
             cliente = Cliente(datos[0])
 
