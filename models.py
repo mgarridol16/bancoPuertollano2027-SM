@@ -69,6 +69,9 @@ class Cliente:
     def getDeposito(self):
         return self.deposito
 
+    def getSaldoTotal(self):
+        return self.cuenta.getSaldo() + self.deposito.getSaldo()
+
     def guardar(self):
         if not os.path.exists("datosClientes"):
             os.mkdir("datosClientes")
