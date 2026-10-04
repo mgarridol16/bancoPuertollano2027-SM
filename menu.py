@@ -29,6 +29,7 @@ def menu():
                 print(f"Cliente: {cliente.numero}")
                 print(f"Saldo cuenta: {cliente.cuenta.saldo} €")
                 print(f"Saldo depósito: {cliente.deposito.saldo} €")
+                print(f"Saldo total: {cliente.getSaldoTotal()} ")
             else:
                 log.escribir("ERROR", f"NO HAY NINGUN CLIENTE CARGADO CON EL NUMERO INTRODUCIDO")
 
