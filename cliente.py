@@ -26,6 +26,7 @@ def leerFichero(numCliente):
         log.escribir("INFO", f"Iniciando carga de cliente {numCliente}")
         with open(f"ficherosClientes/{numCliente}.txt", "r") as f:
 
+            movimientos_procesados = 0
             linea = f.readline()
 
             while linea:
@@ -44,15 +45,20 @@ def leerFichero(numCliente):
 
                 if destino == "Cuenta" and operacion == "Ingreso":
                     cliente.cuenta.ingresar(cantidad)
+                    movimientos_procesados += 1
                     log.escribir("INFO", f"Procesado: Operacion={operacion}, Destino={destino}, Cantidad={cantidad}")
                 elif destino == "Cuenta" and operacion == "Retirada":
                     cliente.cuenta.retirar(cantidad)
+                    movimientos_procesados += 1
                     log.escribir("INFO", f"Procesado: Operacion={operacion}, Destino={destino}, Cantidad={cantidad}")
                 elif destino == "Deposito" and operacion == "Ingreso":
                     cliente.deposito.ingresar(cantidad)
+                    movimientos_procesados += 1
                     log.escribir("INFO", f"Procesado: Operacion={operacion}, Destino={destino}, Cantidad={cantidad}")
                 elif destino == "Deposito" and operacion == "Retirada":
                     cliente.deposito.retirar(cantidad)
+                    movimientos_procesados += 1
+                    log.escribir("INFO", f"Procesado: Operacion={operacion}, Destino={destino}, Cantidad={cantidad}")
                 else:
                     log.escribir("WARNING", f"Movimiento no reconocido: Operacion={operacion}, Destino={destino}")
 
@@ -60,6 +66,10 @@ def leerFichero(numCliente):
 
         # Guardamos el estado final del cliente
         cliente.guardar()
+
+        print(f"Movimientos procesados: {movimientos_procesados}")
+        log.escribir("INFO", f"Movimientos procesados: {movimientos_procesados}")
+
         log.escribir("INFO", f"Carga de cliente {numCliente} finalizada correctamente")
         print("Datos del cliente cargados correctamente")
 
