@@ -80,5 +80,5 @@ class Cliente:
             f.write(
                 f"{self.numero}\n"
                 f"{self.cuenta.getSaldo()}\n"
-                f"{self.deposito.getSaldo()}\n"
+                f"{self.deposito.getSaldo()}"
             )
